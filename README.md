@@ -169,7 +169,7 @@ It also uses `behave --format json --out reports/report.json` to generate a test
 name: Run Selenium Tests with Behave
 
 on:
-  pull_request:
+  push:
     branches:
       - main
 
@@ -178,30 +178,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-python@v4
         with:
           python-version: "3.12"
-
-      - name: Install Dependencies
+          
+      - name: Install dependencies
         run: |
-          python -m venv venv   
-          source venv/bin/activate
-          pip install --upgrade pip
-          pip install selenium behave
-          pip install webdriver-manager
-
-      - name: Run Behave Tests
+          pip install selenium behave webdriver-manager
+          
+      - name: Run tests
         run: |
-          source venv/bin/activate
           mkdir -p reports
           behave --format json --out reports/report.json
-
-      - name: Upload Test Reports
-        uses: actions/upload-artifact@v4
+          
+      - uses: actions/upload-artifact@v4
         with:
           name: test-reports
           path: reports/
