@@ -1,6 +1,7 @@
 from behave import given, when, then
-from pages.login_page import LoginPage
 from selenium.webdriver.common.by import By
+from pages.login_page import LoginPage
+from pages.inventory_page import InventoryPage
 
 @given('the user is on the login page')
 def step_given_user_on_login_page(context):

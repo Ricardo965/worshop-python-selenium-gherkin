@@ -1,0 +1,33 @@
+Feature: Compra de un producto en SauceDemo # features/checkout.feature:1
+
+  Scenario: Usuario inicia sesión, agrega un producto y completa la compra        # features/checkout.feature:3
+    Given the user is on the login page                                           # features/steps/login_steps.py:6
+    When the user logs in with valid credentials                                  # features/steps/login_steps.py:11
+    Then the user should be redirected to the inventory page                      # features/steps/login_steps.py:24
+    When the user adds "Sauce Labs Backpack" to the cart                          # features/steps/checkout_steps.py:6
+    And proceeds to checkout                                                      # features/steps/checkout_steps.py:12
+    And enters shipping details "Juan" "Pérez" "12345"                            # features/steps/checkout_steps.py:20
+    And completes the purchase                                                    # features/steps/checkout_steps.py:24
+    Then the confirmation message "Thank you for your order!" should be displayed # features/steps/checkout_steps.py:29
+
+Feature: Login Feature # features/login.feature:1
+
+  Scenario: Successful login with valid credentials          # features/login.feature:2
+    Given the user is on the login page                      # features/steps/login_steps.py:6
+    When the user logs in with valid credentials             # features/steps/login_steps.py:11
+    Then the user should be redirected to the inventory page # features/steps/login_steps.py:24
+
+  Scenario: Unsuccessful login with invalid credentials  # features/login.feature:7
+    Given the user is on the login page                  # features/steps/login_steps.py:6
+    When the user logs in with invalid credentials       # features/steps/login_steps.py:16
+    Then an error message should be displayed            # features/steps/login_steps.py:28
+
+  Scenario: Empty login credentials              # features/login.feature:12
+    Given the user is on the login page          # features/steps/login_steps.py:6
+    When the user logs in with empty credentials # features/steps/login_steps.py:20
+    Then an error message should be displayed    # features/steps/login_steps.py:28
+
+2 features passed, 0 failed, 0 skipped
+4 scenarios passed, 0 failed, 0 skipped
+17 steps passed, 0 failed, 0 skipped, 0 undefined
+Took 0m1.244s
